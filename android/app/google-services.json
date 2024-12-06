@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "221573319395",
-    "project_id": "agosbuhay-app-db",
-    "storage_bucket": "agosbuhay-app-db.appspot.com"
+    "project_number": "862484008523",
+    "project_id": "halfswift-driving-db",
+    "storage_bucket": "halfswift-driving-db.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:221573319395:android:b5b4f3a513f9e30de413d6",
+        "mobilesdk_app_id": "1:862484008523:android:89418c687f02a207d847ce",
         "android_client_info": {
-          "package_name": "com.example.flutter_app"
+          "package_name": "com.example.halfswift_app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDGy_abg5LLmhUZcvq4sd0vvhNIXwzlF_U"
+          "current_key": "AIzaSyC2bnAbpO_Q1l1hezx7oitPUe8fCFCw3oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862484008523:android:777ec74e8df697f8d847ce",
+        "android_client_info": {
+          "package_name": "com.example.tourista_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2bnAbpO_Q1l1hezx7oitPUe8fCFCw3oE"
         }
       ],
       "services": {

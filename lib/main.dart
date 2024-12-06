@@ -1,13 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Import for SystemChrome
-import 'package:flutter_app/pages/Notification_Handler/notification_handler.dart';
-import 'package:flutter_app/routes/app_routes.dart'; // Import the routes
+import 'package:flutter_app/pages/splash.dart';
 import 'package:timezone/data/latest.dart' as tz;
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
 
   // Lock the app to portrait mode
   SystemChrome.setPreferredOrientations([
@@ -15,13 +24,8 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Initialize time zones and notifications
+  // Initialize time zones
   tz.initializeTimeZones();
-  NotificationHandler notificationHandler = NotificationHandler();
-  notificationHandler.initializeNotifications();
-
-  // Request notification permissions
-  await notificationHandler.requestNotificationPermissions();
 
   runApp(MyApp());
 }
@@ -32,10 +36,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'HalfSwift',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splashScreen, // Set initial route if needed
-      routes: AppRoutes.getRoutes(), // Use the routes defined in AppRoutes
+      home: Splash(), // Start with the SplashScreen
     );
   }
 }

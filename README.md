@@ -1,4 +1,4 @@
-# EduHelix
+# HailSwift App
 
 This app is developed by Jan Miko A. Guevarra, AKA Pinocchio.
 

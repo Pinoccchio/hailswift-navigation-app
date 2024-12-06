@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/SignIn_Screen/sign_up_filled.dart';
+import 'package:flutter_app/pages/Home_Screen/driver_home_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../Home_Screen/home.dart';
+import '../Home_Screen/client_home_screen.dart';
 import '../Notification_Handler/notification_handler.dart';
 
 class SignInFilled extends StatefulWidget {
@@ -59,14 +58,6 @@ class _SignInFilledState extends State<SignInFilled> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 250,
-                      height: 200,
-                      child: Image.asset(
-                        'assets/images/logo-no-background.png',
-                        fit: BoxFit.contain,
-                      ),
-                    ),
                     Text(
                       'Welcome!',
                       style: GoogleFonts.poppins(
@@ -134,27 +125,43 @@ class _SignInFilledState extends State<SignInFilled> {
                             .get();
 
                         if (userDoc.exists) {
-                          var user = userDoc.data()!;
-                          _showToast("Welcome, ${user['fullName']}", Colors.green);
+                          // Navigate or handle logic based on the email
+                          if (email.contains('user')) {
+                            _showToast("Welcome, $email", Colors.green);
 
-                          // Save login state in SharedPreferences
-                          await _saveLoginState(email);
+                            // Save login state in SharedPreferences
+                            await _saveLoginState(email);
 
-                          print("Success");
+                            // Show welcome notification
+                            await _notificationHandler.showWelcomeNotification(email);
 
-                          // Show welcome notification
-                          await _notificationHandler.showWelcomeNotification(user['fullName']);
-
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home(
-                                email: user['email'],
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ClientHomeScreen(
+                                  email: email,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          } else if (email.contains('driver')) {
 
+                            // Save login state in SharedPreferences
+                            await _saveLoginState(email);
 
+                            // Show welcome notification
+                            await _notificationHandler.showWelcomeNotification(email);
+
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DriverHomeScreen(
+                                  email: email,
+                                ),
+                              ),
+                            );
+                          } else {
+                            _showToast("Unknown role. Please contact support.", Colors.red);
+                          }
                         } else {
                           _showToast('User not found', Colors.red);
                         }
@@ -181,38 +188,6 @@ class _SignInFilledState extends State<SignInFilled> {
                     color: Colors.black,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              // Sign Up prompt
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "No account? ",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigate to the Sign Up page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpFilled()),
-                      );
-                    },
-                    child: Text(
-                      "Sign Up",
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: const Color(0xFF73CBE6),
-                      ),
-                    ),
-                  ),
-                ],
               ),
               const SizedBox(height: 20),
             ],

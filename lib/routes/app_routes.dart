@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/SignIn_Screen/sign_in_filled.dart';
 import 'package:flutter_app/pages/splash.dart';
-import 'package:flutter_app/pages/group_36133.dart';
-import 'package:flutter_app/pages/group_36136.dart';
-import 'package:flutter_app/pages/group_36137.dart';
-import 'package:flutter_app/pages/group_36139.dart';
-import 'package:flutter_app/pages/group_36140.dart';
-import 'package:flutter_app/pages/group_36141.dart';
-import 'package:flutter_app/pages/Home_Screen/home.dart';
 import 'package:flutter_app/pages/profile.dart';
 import 'package:flutter_app/pages/sign_out.dart';
-import 'package:flutter_app/pages/study_planner_1.dart';
-import 'package:flutter_app/pages/portable-doc-reader.dart';
-import 'package:flutter_app/pages/transcriptions.dart';
-import '../pages/Database_Helper/static_users.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splashScreen';
@@ -36,12 +25,6 @@ class AppRoutes {
     return {
       splashScreen: (context) => Splash(),
       signInFilled: (context) => SignInFilled(),
-      group36133: (context) => Group36133(),
-      group36136: (context) => Group36136(),
-      group36137: (context) => Group36137(),
-      group36139: (context) => Group36139(),
-      group36140: (context) => Group36140(),
-      group36141: (context) => Group36141(),
 
       /*
       home: (context) {
@@ -81,7 +64,6 @@ class AppRoutes {
       },
 
       signOut: (context) => SignOut(),
-      transcriptions: (context) => Transcriptions(),
     };
   }
 }
